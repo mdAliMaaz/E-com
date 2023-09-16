@@ -1,11 +1,17 @@
 import asyncHandler from 'express-async-handler';
 
 import Product from '../models/productModel.js';
+import { ApiFeatures } from '../utils/apifeatures.js';
 
 // @ Desc get all products
 // @ Route GET: /api/products
 export const getAllProducts = asyncHandler(async (req, res) => {
-    const allProducts = await Product.find();
+
+    // Searching for products
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
+
+
+    const allProducts = await apiFeature.query
 
     if (!allProducts) {
         res.status(404).json({ message: 'Products not found' })
