@@ -1,12 +1,8 @@
-class ApiFeatures {
+# Searching functionality
 
-    constructor(query, queryString) {
-        this.query = query;
-        this.queryString = queryString;
-    }
+```js
 
-    // Searching functionality based on name
-    search() {
+search() {
         const keyword = this.queryString.keyword ? {
             name: {
                 $regex: this.queryString.keyword,
@@ -18,10 +14,13 @@ class ApiFeatures {
         return this
 
     }
+```
 
-    /* filtering the products based on price and category , first i am making copy of the query string and then modifiying it for my need and not creating any problem for searching functionality */
+# filtering functionality
 
-    filter() {
+```js
+
+ filter() {
         // copying queary because i will chanhe it bit
         const queryCopy = { ...this.queryString }
 
@@ -40,6 +39,4 @@ class ApiFeatures {
 
         return this;
     }
-}
-
-export { ApiFeatures }
+```

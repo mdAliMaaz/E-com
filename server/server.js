@@ -13,9 +13,11 @@ const app = express();
 dotenv.config();
 dbConnect();
 
+
 // midddleware
 app.use(express.json());
 app.use(cors({ origin: process.env.ORIGIN, credentials: true }));
+
 
 
 // routes
