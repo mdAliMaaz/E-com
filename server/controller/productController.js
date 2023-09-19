@@ -8,15 +8,16 @@ import { ApiFeatures } from '../utils/apifeatures.js';
 export const getAllProducts = asyncHandler(async (req, res) => {
 
     // Searching for products
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter();
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(5);
 
+    const productCount = await Product.countDocuments();
 
     const allProducts = await apiFeature.query
 
     if (!allProducts) {
         res.status(404).json({ message: 'Products not found' })
     }
-    res.status(200).json({ allProducts })
+    res.status(200).json({ allProducts, productCount })
 })
 
 // @ Desc get all products
@@ -36,6 +37,7 @@ export const getProductById = asyncHandler(async (req, res) => {
 // @ Route POST:/api/products
 // @ ADMIN
 export const addNewProduct = asyncHandler(async (req, res) => {
+    req.body.user = req.user._id;
     const newProduct = await Product.create(req.body);
 
     if (newProduct) {

@@ -1,10 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
+import cookieParser from 'cookie-parser';
 
 import { notFound, errorHandler } from './middlewares/errorHandler.js'
 import productRouter from './routes/productRoutes.js'
+import userRouter from './routes/userRoutes.js'
 import dbConnect from './config/dbConfig.js';
 
 const app = express();
@@ -16,12 +17,13 @@ dbConnect();
 
 // midddleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({ origin: process.env.ORIGIN, credentials: true }));
 
 
 
 // routes
-app.use('/', productRouter)
+app.use('/', productRouter, userRouter);
 
 
 
