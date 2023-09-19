@@ -40,3 +40,25 @@ search() {
         return this;
     }
 ```
+
+# Checking whether user is Admin or User
+
+```js
+const isAdmin = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      res.status(403);
+      throw new Error("you are not Admin NOT authorized");
+    }
+    next();
+  };
+};
+```
+
+# In ProductRoutes.js file
+
+```js
+isAdmin("admin");
+```
+
+- add this to every route which you want to access only by admin role
