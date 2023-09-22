@@ -4,6 +4,8 @@ import { checkPassword } from '../utils/hashPassword.js'
 import { generateToken } from '../utils/generateToken.js';
 import { sendEmail } from '../utils/sendEmail.js';
 import crypto from 'crypto';
+
+
 // @Desc get All Users
 // @ Route GET: /api/users
 export const getAllUsers = asyncHandler(async (req, res) => {
@@ -54,7 +56,6 @@ export const login = asyncHandler(async (req, res) => {
 // @Desc get User by ID
 // @ Route GET: /api/users
 export const getUserById = asyncHandler(async (req, res) => {
-    console.log(req.user)
     const id = req.params.id;
 
     const user = await User.findById(id);
@@ -192,4 +193,67 @@ export const resetPassword = asyncHandler(async (req, res) => {
     user.resetPasswordTokenExpire = undefined;
     await user.save();
     res.status(200).json({ success: true, message: 'Password updated successfully' });
+})
+
+// @Desc Get user information
+// @ Route Get: /api/users/me
+export const getUserInfo = asyncHandler(async (req, res) => {
+
+
+    const user = await User.findById(req.user._id).select('-password')
+
+    res.status(200).json({ success: true, user })
+})
+
+// @Desc Logout User
+// @ Route Post: /api/users/logout
+export const logout = asyncHandler(async (req, res) => {
+    res.cookie("token", "", {
+        httpOnly: true,
+    })
+    res.status(200).json({ message: "User logged out successfully" })
+})
+
+
+// @Desc Change user password
+// @ Route Post: /api/users/password/change
+export const changePassword = asyncHandler(async (req, res) => {
+
+
+    const user = await User.findById(req.user.id)
+
+    const { newPassword, oldPassword, conformPassword } = req.body;
+
+
+    const isPasswordCorrect = checkPassword(oldPassword, user.password);
+
+    if (!isPasswordCorrect) {
+        res.status(403)
+        throw new Error("Password does not match");
+    }
+
+    if (newPassword !== conformPassword) {
+        res.status(401)
+        throw new Error("New Password and Conform Password must be same");
+    }
+
+    user.password = newPassword;
+    await user.save();
+    res.status(200).json({ message: "Password updated successfully" })
+})
+
+
+// @Desc Update User
+// @ Route PUT: /api/me/update
+export const updateProfile = asyncHandler(async (req, res) => {
+
+    const updatedData = {
+        name: req.body.name,
+        email: req.body.email
+    }
+
+    const updatedProfile = await User.findByIdAndUpdate(req.user.id, updatedData, { new: true });
+
+    res.status(200).json({ success: true, message: "Profile updated successfully", updatedProfile })
+
 })

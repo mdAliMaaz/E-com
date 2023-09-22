@@ -14,7 +14,12 @@ const protect = asyncHandler(async (req, res, next) => {
 
             const user = await User.findById(data.id).select('-password');
 
-            req.user = user;
+            req.user = {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            }
 
             next();
 
@@ -26,7 +31,7 @@ const protect = asyncHandler(async (req, res, next) => {
     }
     else {
         res.status(401)
-        throw new Error("Not authorized , No token found")
+        throw new Error(" No token found , Login again")
     }
 })
 
