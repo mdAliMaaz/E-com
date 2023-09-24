@@ -1,9 +1,11 @@
-import User from '../models/userModel.js';
 import asyncHandler from 'express-async-handler';
+
+import crypto from 'crypto';
+
+import User from '../models/userModel.js';
 import { checkPassword } from '../utils/hashPassword.js'
 import { generateToken } from '../utils/generateToken.js';
 import { sendEmail } from '../utils/sendEmail.js';
-import crypto from 'crypto';
 
 
 // @Desc get All Users
@@ -20,7 +22,7 @@ export const getAllUsers = asyncHandler(async (req, res) => {
     res.status(200).json(allUsers)
 })
 
-// @Desc Login User
+// @Desc Login User Only "Admin"
 // @ Route POST: /api/users/login
 export const login = asyncHandler(async (req, res) => {
 
@@ -36,7 +38,6 @@ export const login = asyncHandler(async (req, res) => {
     const correctPassword = checkPassword(password, exixtingUser.password);
 
 
-    console.log(correctPassword)
 
 
     if (!correctPassword) {
@@ -53,7 +54,7 @@ export const login = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, message: "User successfully logged in", name: exixtingUser.name });
 })
 
-// @Desc get User by ID
+// @Desc get User by ID only "Admin"
 // @ Route GET: /api/users
 export const getUserById = asyncHandler(async (req, res) => {
     const id = req.params.id;
@@ -94,7 +95,7 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 
 // @Desc Update User
-// @ Route PUT: /api/users
+// @ Route PUT: /api/admin/users/:id
 export const updateUser = asyncHandler(async (req, res) => {
 
 
@@ -107,12 +108,12 @@ export const updateUser = asyncHandler(async (req, res) => {
         throw new Error('Something went wrong')
     }
 
-    res.status(200).json({ success: true, message: "User updated successfully", updatedUser })
+    res.status(200).json({ success: true, message: "User role updated", role: updatedUser.role })
 
 
 })
 // @Desc delete User
-// @ Route DELETE: /api/users
+// @ Route DELETE: /api/admin/users/:id
 export const deleteUser = asyncHandler(async (req, res) => {
 
     const id = req.params.id;
@@ -122,7 +123,7 @@ export const deleteUser = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Something went wrong')
     }
-    res.status(200).json({ success: true, message: "User deleted successfully", deletedUser })
+    res.status(200).json({ success: true, message: "User deleted successfully",name: deletedUser.name })
 })
 
 // @Desc Forgot Password
@@ -257,3 +258,4 @@ export const updateProfile = asyncHandler(async (req, res) => {
     res.status(200).json({ success: true, message: "Profile updated successfully", updatedProfile })
 
 })
+
