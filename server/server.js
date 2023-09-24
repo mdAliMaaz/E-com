@@ -4,9 +4,11 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 import { notFound, errorHandler } from './middlewares/errorHandler.js'
+import dbConnect from './config/dbConfig.js';
+
 import productRouter from './routes/productRoutes.js'
 import userRouter from './routes/userRoutes.js'
-import dbConnect from './config/dbConfig.js';
+import orderRouter from './routes/orderRoute.js'
 
 const app = express();
 
@@ -23,7 +25,9 @@ app.use(cors({ origin: process.env.ORIGIN, credentials: true }));
 
 
 // routes
-app.use('/', productRouter, userRouter);
+app.use('/', userRouter);
+app.use('/', productRouter);
+app.use('/', orderRouter);
 
 
 
