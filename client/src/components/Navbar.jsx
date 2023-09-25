@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
 import { LiaShopware } from "react-icons/lia";
 import { useState } from "react";
 
@@ -21,13 +21,17 @@ const links = [
     href: "/products",
     title: "Products",
   },
+  {
+    href: "/cart",
+    title: <AiOutlineShoppingCart className=' text-2xl' />,
+  },
 ];
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
 
   return (
-    <nav className='w-screen  px-8 py-4 shadow-sm bg-slate-900 text-white '>
+    <nav className='w-full  px-8 py-4 shadow-sm bg-slate-900 text-white '>
       <div className=' flex items-center justify-between'>
         <Link to={"/"}>
           <div className='text-2xl lg:text-3xl flex gap-2 items-center'>

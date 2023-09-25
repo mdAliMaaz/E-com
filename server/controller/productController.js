@@ -8,7 +8,7 @@ import { ApiFeatures } from '../utils/apifeatures.js';
 export const getAllProducts = asyncHandler(async (req, res) => {
 
     // Searching for products
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(5);
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(8);
 
     const productCount = await Product.countDocuments();
 
@@ -17,7 +17,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
     if (!allProducts) {
         res.status(404).json({ message: 'Products not found' })
     }
-    res.status(200).json({ allProducts, productCount })
+    res.status(200).json({ products: allProducts, productCount })
 })
 
 // @ Desc get all products
