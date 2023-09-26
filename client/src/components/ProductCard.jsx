@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Product = ({ item }) => {
+const ProductCard = ({ item }) => {
   const {
     name,
     description,
@@ -38,4 +38,4 @@ const Product = ({ item }) => {
   );
 };
 
-export default Product;
+export default ProductCard;

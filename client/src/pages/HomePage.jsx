@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { getProducts } from "../redux/features/productSlice";
 import { Container, Loading, ScrollToTop } from "../components";
-import { Product } from "../components";
+import { ProductCard } from "../components";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const HomePage = () => {
                 {isLoading && "Loading..."}
                 {data.products &&
                   data.products.map((item) => (
-                    <Product item={item} key={item._id} />
+                    <ProductCard item={item} key={item._id} />
                   ))}
               </div>
             </div>

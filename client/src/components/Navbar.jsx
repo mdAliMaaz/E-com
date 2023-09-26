@@ -53,7 +53,7 @@ const Navbar = () => {
         {menu && (
           <div
             className=' bg-slate-900 absolute top-24 right-10  lg:hidden h-1/2 w-1/2 flex flex-col
-        justify-center items-center gap-10 shadow-lg rounded-md
+        justify-center items-center gap-10 shadow-lg rounded-md z-50
         '
           >
             {links.map((item) => (

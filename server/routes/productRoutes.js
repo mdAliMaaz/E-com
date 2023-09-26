@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.route('/api/products').get(getAllProducts).post(protect, protect, isAdmin("admin"), addNewProduct);
 
-router.route('/api/products/:id').get(protect, getProductById).put(protect, isAdmin("admin"), updateProduct).delete(protect, isAdmin("admin"), deleteProduct);
+router.route('/api/products/:id').get(getProductById);
+
+router.route('/api/products/:id').put(protect, isAdmin("admin"), updateProduct).delete(protect, isAdmin("admin"), deleteProduct);
 
 router.route("/api/review").put(protect, addRewiewAndUpdate);
 

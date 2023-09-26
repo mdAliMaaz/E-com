@@ -62,12 +62,9 @@ const Footer = () => {
           ))}
         </div>
         <div>
-          <h1 className=' text-gray-400 my-3'>{footerLinksTitle[4]}</h1>
+          <h1 className=' text-gray-400 my-3 '>{footerLinksTitle[4]}</h1>
           {footerLinks.MailUs.map((item) => (
-            <div
-              className=' flex flex-col gap-1  mkey={item}ax-w-sm '
-              key={item}
-            >
+            <div className=' flex flex-col gap-1  max-w-sm ' key={item}>
               <span>{item}</span>
             </div>
           ))}
