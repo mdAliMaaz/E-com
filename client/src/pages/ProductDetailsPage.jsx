@@ -14,7 +14,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Container, ReviewCard, Loading } from "../components";
 
-const ProductDetails = () => {
+const ProductDetailsPage = () => {
   const dispatch = useDispatch();
 
   const { isLoading, isError, data } = useSelector(
@@ -67,6 +67,9 @@ const ProductDetails = () => {
 
             <div className='flex-grow p-10 flex flex-col gap-10'>
               {/* right */}
+              <h1 className=' text-2xl lg:text-4xl font-semibold uppercase'>
+                {info.name}
+              </h1>
               <div className=' border-b-2'>
                 <h1 className='text-3xl mb-2 lg:text-5xl'>Subscribe</h1>
                 <p>Product # {info._id}</p>
@@ -137,4 +140,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;

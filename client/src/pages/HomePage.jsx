@@ -11,7 +11,7 @@ const HomePage = () => {
   const { data, isLoading, isError } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts({ keyword: "", page: 1 }));
   }, [dispatch]);
 
   return (
@@ -41,7 +41,11 @@ const HomePage = () => {
                 {isLoading && "Loading..."}
                 {data.products &&
                   data.products.map((item) => (
-                    <ProductCard item={item} key={item._id} />
+                    <ProductCard
+                      href={`/products/${item._id}`}
+                      item={item}
+                      key={item._id}
+                    />
                   ))}
               </div>
             </div>

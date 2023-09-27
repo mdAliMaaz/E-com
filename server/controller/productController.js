@@ -8,7 +8,7 @@ import { ApiFeatures } from '../utils/apifeatures.js';
 export const getAllProducts = asyncHandler(async (req, res) => {
 
     // Searching for products
-    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(8);
+    const apiFeature = new ApiFeatures(Product.find(), req.query).search().filter().pagination(6);
 
     const productCount = await Product.countDocuments();
 

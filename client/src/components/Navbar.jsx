@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
+import { BiUserCircle } from "react-icons/bi";
 import { LiaShopware } from "react-icons/lia";
 import { useState } from "react";
 
@@ -9,17 +10,20 @@ const links = [
     href: "/",
     title: "Home",
   },
-  {
-    href: "/about",
-    title: "About",
-  },
-  {
-    href: "/contact",
-    title: "Contact",
-  },
+
   {
     href: "/products",
     title: "Products",
+  },
+  {
+    href: "/login",
+
+    title: (
+      <div className=' relative'>
+        <div className=' absolute bg-teal-600 w-2 h-2 top-1 right-1 animate-ping rounded-full'></div>
+        <BiUserCircle className=' text-2xl ' />
+      </div>
+    ),
   },
   {
     href: "/cart",

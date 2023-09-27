@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item, href }) => {
   const {
     name,
     description,
@@ -14,10 +14,7 @@ const ProductCard = ({ item }) => {
   } = item;
 
   return (
-    <Link
-      to={`product/${_id}`}
-      className=' hover:-translate-y-3 transition-all'
-    >
+    <Link to={href} className=' hover:-translate-y-3 transition-all'>
       <div className=' w-fit border border-black/50 p-2 shadow-lg rounded-sm'>
         <div>
           <img

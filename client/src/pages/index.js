@@ -1,4 +1,7 @@
 import HomePage from "./HomePage";
-import ProductDetails from "./ProductDetails";
+import LoginPage from "./LoginPage";
+import ProductDetailsPage from "./ProductDetailsPage";
+import ProductsPage from "./ProductsPage";
+import RegisterPage from "./RegisterPage";
 
-export { HomePage, ProductDetails }
+export { HomePage, ProductDetailsPage, ProductsPage, LoginPage, RegisterPage }
