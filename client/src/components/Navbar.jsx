@@ -4,6 +4,9 @@ import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { LiaShopware } from "react-icons/lia";
 import { useState } from "react";
+import useAuth from "../hooks/useAuth";
+
+const user = useAuth();
 
 const links = [
   {
@@ -16,7 +19,7 @@ const links = [
     title: "Products",
   },
   {
-    href: "/login",
+    href: user ? "/profile" : "/login",
 
     title: (
       <div className=' relative'>

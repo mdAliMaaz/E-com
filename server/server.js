@@ -9,7 +9,8 @@ import dbConnect from './config/dbConfig.js';
 import productRouter from './routes/productRoutes.js'
 import userRouter from './routes/userRoutes.js'
 import orderRouter from './routes/orderRoute.js'
-
+import fileUpload from 'express-fileupload'
+import cloudinary from 'cloudinary'
 const app = express();
 
 // config
@@ -21,8 +22,16 @@ dbConnect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: process.env.ORIGIN, credentials: true }));
+app.use(fileUpload({
+    useTempFiles: true,
+}));
 
-
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_SECRET,
+    secure: true
+});
 
 // routes
 app.use('/', userRouter);

@@ -7,5 +7,7 @@ import Loading from './Loading'
 import ReviewCard from './ReviewCard'
 import Searchbar from './Searchbar'
 import Pagination from './Pagination'
+import ProtectedRoute from './ProtectedRoute'
+import PublicRoute from './PublicRoute'
 
-export { Navbar, Footer, Container, ProductCard, ScrollToTop, Loading, ReviewCard, Searchbar, Pagination }
+export { Navbar, Footer, Container, ProductCard, ScrollToTop, Loading, ReviewCard, Searchbar, Pagination, ProtectedRoute, PublicRoute }

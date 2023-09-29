@@ -5,7 +5,13 @@ import { getProducts } from "../redux/features/productSlice";
 import { Container, Loading, ScrollToTop } from "../components";
 import { ProductCard } from "../components";
 
+import useAuth from "../hooks/useAuth";
+
+
 const HomePage = () => {
+
+  const user = useAuth();
+
   const dispatch = useDispatch();
 
   const { data, isLoading, isError } = useSelector((state) => state.products);

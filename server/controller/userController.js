@@ -2,11 +2,14 @@ import asyncHandler from 'express-async-handler';
 
 import crypto from 'crypto';
 
+import cloudinary from 'cloudinary';
+
 import User from '../models/userModel.js';
 import { checkPassword } from '../utils/hashPassword.js'
 import { generateToken } from '../utils/generateToken.js';
 import { sendEmail } from '../utils/sendEmail.js';
 
+import { uploadImage } from '../utils/cloudinary.js';
 
 // @Desc get All Users
 // @ Route GET: /api/users
@@ -73,16 +76,24 @@ export const registerUser = asyncHandler(async (req, res) => {
 
     const { name, email, password } = req.body;
 
+    const { tempFilePath } = req.files.avatar;
 
+    const { url, public_id } = await uploadImage(tempFilePath);
+
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+        return res.status(400).json({ success: false, message: "Email already taken" })
+    }
     const newUser = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: "sample Public id",
-            url: "http://example.com"
+            public_id: public_id || "sample_imageId",
+            url: url || "sample_image_url"
         }
-    })
+    });
 
 
     if (!newUser) {
@@ -123,7 +134,7 @@ export const deleteUser = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Something went wrong')
     }
-    res.status(200).json({ success: true, message: "User deleted successfully",name: deletedUser.name })
+    res.status(200).json({ success: true, message: "User deleted successfully", name: deletedUser.name })
 })
 
 // @Desc Forgot Password
@@ -201,7 +212,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
 export const getUserInfo = asyncHandler(async (req, res) => {
 
 
-    const user = await User.findById(req.user._id).select('-password')
+    const user = await User.findById(req.user.id).select('-password')
 
     res.status(200).json({ success: true, user })
 })
@@ -212,7 +223,7 @@ export const logout = asyncHandler(async (req, res) => {
     res.cookie("token", "", {
         httpOnly: true,
     })
-    res.status(200).json({ message: "User logged out successfully" })
+    res.status(200).json({ success: true, message: "User logged out successfully" })
 })
 
 
@@ -253,7 +264,24 @@ export const updateProfile = asyncHandler(async (req, res) => {
         email: req.body.email
     }
 
+    if (req.files.avatar) {
+        const user = await User.findById(req.user.id);
+
+        const imageId = user.avatar.public_id;
+
+        await cloudinary.v2.uploader.destroy(imageId);
+
+        const { tempFilePath } = req.files.avatar;
+
+        const { url, public_id } = await uploadImage(tempFilePath)
+
+        updatedData.avatar = {
+            url,
+            public_id
+        }
+    }
     const updatedProfile = await User.findByIdAndUpdate(req.user.id, updatedData, { new: true });
+
 
     res.status(200).json({ success: true, message: "Profile updated successfully", updatedProfile })
 

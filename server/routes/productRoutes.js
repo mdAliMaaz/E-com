@@ -5,7 +5,7 @@ import { protect, isAdmin } from '../middlewares/authMiddleware.js'
 const router = express.Router();
 
 
-router.route('/api/products').get(getAllProducts).post(protect, protect, isAdmin("admin"), addNewProduct);
+router.route('/api/products').get(protect, getAllProducts).post(protect, protect, isAdmin("admin"), addNewProduct);
 
 router.route('/api/products/:id').get(getProductById);
 

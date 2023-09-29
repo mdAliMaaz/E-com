@@ -8,10 +8,9 @@ export const getProducts = createAsyncThunk("getProducts", async ({ keyword = ""
     if (category) {
         url = `http://localhost:5000/api/products?keyword=${keyword}&page=${page}&category=${category}`
     }
-    const response = await fetch(url);
+    const response = await fetch(url, { method: "GET", credentials: "include" });
 
-    console.log(url)
-    return response.json()
+    return await response.json()
 })
 
 
