@@ -77,12 +77,48 @@ export const logout = createAsyncThunk("logout", async () => {
     }
 })
 
+export const forgotPassword = createAsyncThunk("forgotPassword", async (formData) => {
+
+    try {
+        const response = await fetch("http://localhost:5000/api/users/password/forgot", { method: "POST", credentials: "include", body: formData })
+        const data = await response.json()
+        if (data.success) {
+            handleSuccess(data.message, data.success)
+        }
+        else {
+            handleError(data.message)
+        }
+        return data
+    } catch (error) {
+        handleError(error.message);
+    }
+})
+
+export const resetPassword = createAsyncThunk('resetPassword', async ({ formData, token }) => {
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/users/password/reset/${token}`, { credentials: "include", method: "PUT", body: formData })
+
+        const data = await response.json()
+        if (data.success) {
+            handleSuccess(data.message, data.success)
+            setTimeout(() => {
+                window.location.replace('/login')
+            }, 1000)
+        }
+        else {
+            handleError(data.message)
+        }
+        return data
+    } catch (error) {
+        handleError(error.message);
+    }
+})
 const initialState = {
     isLoading: false,
     isError: false,
     data: {}
 }
-
 
 
 const authSlice = createSlice({

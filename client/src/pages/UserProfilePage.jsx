@@ -79,7 +79,10 @@ const UserProfilePage = () => {
                 <Link className=' px-5 py-2 bg-orange-500 text-white hover:bg-orange-300 transition-colors'>
                   Orders
                 </Link>
-                <Link className=' px-5 py-2 bg-orange-500 text-white hover:bg-orange-300 transition-colors'>
+                <Link
+                  to={"changepassword"}
+                  className=' px-5 py-2 bg-orange-500 text-white hover:bg-orange-300 transition-colors'
+                >
                   Change Password
                 </Link>
               </div>

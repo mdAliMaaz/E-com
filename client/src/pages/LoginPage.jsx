@@ -58,11 +58,19 @@ const LoginPage = () => {
             name='password'
           />
         </div>
-        <input
-          type='submit'
-          value={"Submit"}
-          className=' bg-orange-500 text-2xl uppercase px-4 py-2 text-white hover:bg-blue-500 transition-colors shadow-md'
-        />
+        <div className=' flex items-center space-x-5'>
+          <input
+            type='submit'
+            value={"Submit"}
+            className=' bg-orange-500 text-2xl uppercase px-4 py-2 text-white hover:bg-blue-500 transition-colors shadow-md'
+          />
+          <Link
+            to={"/forgotpassword"}
+            className=' mx-2 font-sans text-gray-700'
+          >
+            forgot password
+          </Link>
+        </div>
         <div>
           <span className=' lg:text-lg text-gray-600'>
             Don't have an account ?{" "}

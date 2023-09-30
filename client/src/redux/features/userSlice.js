@@ -40,6 +40,32 @@ export const updateProfile = createAsyncThunk("updateProfile", async (formData) 
     }
 })
 
+
+export const changePassword = createAsyncThunk("changePassword", async (formData) => {
+
+    try {
+        const response = await fetch("http://localhost:5000/api/users/password/change", { credentials: "include", method: "POST", body: formData })
+
+        const data = await response.json();
+
+        if (data.success) {
+            handleSuccess(data.message, data.success)
+            setTimeout(() => {
+                window.location.replace('/profile')
+            }, 1000)
+        }
+        else {
+            handleError(data.message);
+        }
+
+        return data;
+
+    } catch (error) {
+        handleError(error.message);
+    }
+})
+
+
 const initialState = {
     isLoading: false,
     isError: false,

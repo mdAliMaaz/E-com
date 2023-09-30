@@ -155,8 +155,8 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
     await user.save({ validateBeforeSave: false });
 
-
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/password/reset/${resetPasswordToken}`
+    // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/password/reset/${resetPasswordToken}`
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/${resetPasswordToken}`;
 
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n,if you have not requested this email then plese igonre it`;
 
@@ -180,7 +180,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 })
 
 // @Desc Reset Password
-// @ Route DELETE: /api/users/password/reset
+// @ Route PUT: /api/users/password/reset
 export const resetPassword = asyncHandler(async (req, res) => {
 
     const token = req.params.token
@@ -236,7 +236,6 @@ export const changePassword = asyncHandler(async (req, res) => {
 
     const { newPassword, oldPassword, conformPassword } = req.body;
 
-
     const isPasswordCorrect = checkPassword(oldPassword, user.password);
 
     if (!isPasswordCorrect) {
@@ -251,7 +250,7 @@ export const changePassword = asyncHandler(async (req, res) => {
 
     user.password = newPassword;
     await user.save();
-    res.status(200).json({ message: "Password updated successfully" })
+    res.status(200).json({ success: true, message: "Password updated successfully" })
 })
 
 

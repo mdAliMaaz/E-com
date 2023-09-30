@@ -4,7 +4,9 @@ import { AiOutlineClose, AiOutlineShoppingCart } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { LiaShopware } from "react-icons/lia";
 import { useState } from "react";
+
 import useAuth from "../hooks/useAuth";
+import { useSelector } from "react-redux";
 
 const user = useAuth();
 
@@ -28,14 +30,12 @@ const links = [
       </div>
     ),
   },
-  {
-    href: "/cart",
-    title: <AiOutlineShoppingCart className=' text-2xl' />,
-  },
 ];
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+
+  const cartItems = Object.keys(useSelector((state) => state.cart));
 
   return (
     <nav className='w-full  px-8 py-4 shadow-sm bg-slate-900 text-white '>
@@ -77,6 +77,19 @@ const Navbar = () => {
               {item.title}
             </Link>
           ))}
+          {user && (
+            <Link to={"/cart"}>
+              <div className=' relative '>
+                {cartItems.length > 0 && (
+                  <span className=' flex font-mono items-center justify-center w-4 h-4 absolute -top-1  -right-2 bg-orange-500 text-xs rounded-full p-1'>
+                    {cartItems.length || ""}
+                  </span>
+                )}
+
+                <AiOutlineShoppingCart className=' text-2xl' />
+              </div>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

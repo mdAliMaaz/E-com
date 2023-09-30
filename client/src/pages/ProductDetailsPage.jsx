@@ -4,7 +4,7 @@ import { getProductDetails } from "../redux/features/productDetailsSlice";
 
 import ReactStars from "react-rating-stars-component";
 
-import { useEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
@@ -14,7 +14,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import { Container, ReviewCard, Loading } from "../components";
 
+import { addItemToCart } from "../redux/features/cartSlice";
+
 const ProductDetailsPage = () => {
+  const [quantity, setQuantity] = useState(1);
+
   const dispatch = useDispatch();
 
   const { isLoading, isError, data } = useSelector(
@@ -27,7 +31,7 @@ const ProductDetailsPage = () => {
 
   info = { ...info };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getProductDetails(id.toString()));
   }, [dispatch, id]);
 
@@ -37,6 +41,33 @@ const ProductDetailsPage = () => {
     edit: false,
   };
 
+  const incrementquantity = () => {
+    if (data.singleProduct.stock > quantity) {
+      setQuantity((prev) => prev + 1);
+    } else {
+      return;
+    }
+  };
+
+  const decrementquantity = () => {
+    if (quantity > 1) {
+      setQuantity((prev) => prev - 1);
+    } else {
+      return;
+    }
+  };
+
+  const updateCartVale = () => {
+    dispatch(
+      addItemToCart({
+        id: info._id,
+        name: info.name,
+        price: info.price,
+        quantity: quantity,
+        image: info.images[0],
+      })
+    );
+  };
   return (
     <>
       {isLoading ? (
@@ -86,16 +117,25 @@ const ProductDetailsPage = () => {
                 </h1>
                 <div className=' mt-3 flex gap-3 items-center m-3'>
                   <div className=' flex items-center  space-x-4 w-fit bg-gray-500 '>
-                    <button className=' p-2 text-white text-xl bg-black'>
-                      +
-                    </button>
-                    <span className=' p-1 text-white text-xl '>1</span>
-                    <button className=' p-2 text-white text-xl bg-black'>
+                    <button
+                      onClick={decrementquantity}
+                      className=' p-2 text-white text-xl bg-black'
+                    >
                       -
+                    </button>
+                    <span className=' p-1 text-white text-xl'>{quantity}</span>
+                    <button
+                      onClick={incrementquantity}
+                      className=' p-2 text-white text-xl bg-black'
+                    >
+                      +
                     </button>
                   </div>
                   <div>
-                    <button className=' text-sm lg:px-6 lg:py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-400 w-full'>
+                    <button
+                      onClick={updateCartVale}
+                      className=' text-sm lg:px-6 lg:py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-400 w-full'
+                    >
                       Add to Cart
                     </button>
                   </div>
