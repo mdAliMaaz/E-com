@@ -68,6 +68,19 @@ const Navbar = () => {
                 {item.title}
               </Link>
             ))}
+            {user && (
+              <Link to={"/cart"}>
+                <div className=' relative '>
+                  {cartItems.length > 0 && (
+                    <span className=' flex font-mono items-center justify-center w-4 h-4 absolute -top-1  -right-2 bg-orange-500 text-xs rounded-full p-1'>
+                      {cartItems.length || ""}
+                    </span>
+                  )}
+
+                  <AiOutlineShoppingCart className=' text-2xl' />
+                </div>
+              </Link>
+            )}
           </div>
         )}
         <div className='hidden lg:flex space-x-5'>

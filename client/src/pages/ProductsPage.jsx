@@ -69,8 +69,11 @@ const ProductsPage = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 value={category}
               >
+                <option value={""} defaultChecked>
+                  Category
+                </option>
                 {categories.map((item) => (
-                  <option defaultValue={categories[0]} value={item} key={item}>
+                  <option value={item} key={item}>
                     {item}
                   </option>
                 ))}
