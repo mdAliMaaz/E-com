@@ -54,7 +54,7 @@ export const login = asyncHandler(async (req, res) => {
     }
     generateToken(res, options);
 
-    res.status(200).json({ success: true, message: "User successfully logged in", name: exixtingUser.name });
+    res.status(200).json({ success: true, message: "User successfully logged in", name: exixtingUser.name, role: exixtingUser.role });
 })
 
 // @Desc get User by ID only "Admin"
@@ -155,7 +155,6 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
     await user.save({ validateBeforeSave: false });
 
-    // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/password/reset/${resetPasswordToken}`
     const resetPasswordUrl = `${process.env.FRONTEND_URL}/${resetPasswordToken}`;
 
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n,if you have not requested this email then plese igonre it`;

@@ -2,27 +2,38 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import { Footer, Navbar, ProtectedRoute, PublicRoute } from "./components";
+import {
+  AdminRoutes,
+  Footer,
+  Navbar,
+  ProtectedRoute,
+  PublicRoute,
+} from "./components";
 
 import { Route, Routes } from "react-router-dom";
 
 import {
+  AdminProductsPage,
   CartPage,
   ChangePasswordPage,
   CheckoutPage,
   ConformOrder,
+  Dashboard,
   EditProfilePage,
   ForgotPasswordPage,
   HomePage,
   LoginPage,
   MyOrdersPage,
   OrderDetails,
+  OrdersPage,
   PaymentSuccessPage,
   ProductDetailsPage,
   ProductsPage,
   RegisterPage,
   ResetPasswordPage,
+  ReviewsPage,
   UserProfilePage,
+  UsersPage,
 } from "./pages";
 
 const App = () => {
@@ -55,6 +66,14 @@ const App = () => {
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/forgotpassword' element={<ForgotPasswordPage />} />
           <Route path='/resetpassword/:token' element={<ResetPasswordPage />} />
+        </Route>
+        {/*  Admin Routes*/}
+        <Route element={<AdminRoutes />}>
+          <Route path='/admin/dashboard' element={<Dashboard />} />
+          <Route path='/admin/products' element={<AdminProductsPage />} />
+          <Route path='/admin/users' element={<UsersPage />} />
+          <Route path='/admin/orders' element={<OrdersPage />} />
+          <Route path='/admin/reviews' element={<ReviewsPage />} />
         </Route>
       </Routes>
       <Footer />

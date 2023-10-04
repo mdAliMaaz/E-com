@@ -7,8 +7,11 @@ import { useState } from "react";
 
 import useAuth from "../hooks/useAuth";
 import { useSelector } from "react-redux";
+import useAdmin from "../hooks/useAdmin";
 
 const user = useAuth();
+
+const admin = useAdmin();
 
 const links = [
   {
@@ -68,6 +71,7 @@ const Navbar = () => {
                 {item.title}
               </Link>
             ))}
+
             {user && (
               <Link to={"/cart"}>
                 <div className=' relative '>
@@ -85,11 +89,14 @@ const Navbar = () => {
         )}
         <div className='hidden lg:flex space-x-5'>
           {/* right side for laptop */}
+
+          {admin && <Link to='/admin/dashboard'>Dashboard</Link>}
           {links.map((item) => (
             <Link key={item.href} to={item.href}>
               {item.title}
             </Link>
           ))}
+
           {user && (
             <Link to={"/cart"}>
               <div className=' relative '>

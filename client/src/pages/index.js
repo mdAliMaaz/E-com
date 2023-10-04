@@ -14,6 +14,11 @@ import ProductsPage from "./ProductsPage";
 import RegisterPage from "./RegisterPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import UserProfilePage from "./UserProfilePage";
+import Dashboard from './Dashboard';
+import UsersPage from "./UsersPage";
+import AdminProductsPage from "./AdminProductsPage";
+import OrdersPage from "./OrdersPage";
+import ReviewsPage from "./ReviewsPage";
 
 
-export { HomePage, ProductDetailsPage, ProductsPage, LoginPage, RegisterPage, UserProfilePage, EditProfilePage, ChangePasswordPage, ForgotPasswordPage, ResetPasswordPage, CartPage, CheckoutPage, ConformOrder, PaymentSuccessPage, MyOrdersPage, OrderDetails }
+export { HomePage, ProductDetailsPage, ProductsPage, LoginPage, RegisterPage, UserProfilePage, EditProfilePage, ChangePasswordPage, ForgotPasswordPage, ResetPasswordPage, CartPage, CheckoutPage, ConformOrder, PaymentSuccessPage, MyOrdersPage, OrderDetails, Dashboard, UsersPage, AdminProductsPage, OrdersPage, ReviewsPage }

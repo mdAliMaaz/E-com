@@ -42,9 +42,11 @@ export const login = createAsyncThunk("login", async (formData) => {
         }, 1000)
         if (data.success) {
             localStorage.setItem("user", data.name)
+            localStorage.setItem("role", data.role)
         }
         else {
             localStorage.removeItem("user")
+            localStorage.removeItem("role")
         }
 
         return data
@@ -64,6 +66,7 @@ export const logout = createAsyncThunk("logout", async () => {
         if (data.success) {
             handleSuccess(data.message, data.success)
             localStorage.removeItem("user")
+            localStorage.removeItem("role")
             setTimeout(() => {
                 window.location.replace("/login")
             }, 1000)
