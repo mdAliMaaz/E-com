@@ -1,7 +1,7 @@
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { removeItemFromCart } from "../redux/features/cartSlice";
-const CartCard = ({ item, i }) => {
+const CartCard = ({ item, i, delBtn }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -10,13 +10,15 @@ const CartCard = ({ item, i }) => {
   return (
     <div className=' relative mt-3 flex items-center  justify-between w-full shadow-lg border-2 border-gray-500/20 p-4'>
       <p className=' absolute top-0 left-0 text-[8px] text-gray-500'>
-        #{item.id}
+        #{item.product}
       </p>
-      <div className=' absolute top-1 right-2 text-red-700 text-xl'>
-        <button onClick={handleClick}>
-          <AiFillDelete />
-        </button>
-      </div>
+      {delBtn && (
+        <div className=' absolute top-1 right-2 text-red-700 text-xl'>
+          <button onClick={handleClick}>
+            <AiFillDelete />
+          </button>
+        </div>
+      )}
 
       <div className='lg:w-1/12 w-1/6 flex  items-center lg:flex-row  gap-2'>
         <img

@@ -28,7 +28,7 @@ const ProductCard = ({ item, href }) => {
         </div>
         <div className=' flex justify-between items-center'>
           <span className=' text-orange-600 font-bold'>₹{price}</span>
-          <span className=' text-red-500'>Reviews {ratings}</span>
+          <span className=' text-red-500'>Ratings {Math.round(ratings)}</span>
         </div>
       </div>
     </Link>

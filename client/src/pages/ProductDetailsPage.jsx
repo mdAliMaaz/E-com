@@ -12,12 +12,17 @@ import { Carousel } from "react-responsive-carousel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import { Container, ReviewCard, Loading } from "../components";
+import { Container, ReviewCard, Loading, AddReviewCard } from "../components";
 
 import { addItemToCart } from "../redux/features/cartSlice";
 
 const ProductDetailsPage = () => {
   const [quantity, setQuantity] = useState(1);
+
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(1);
+  const [comment, setComment] = useState("");
+  const [submit, setSubmit] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -33,7 +38,7 @@ const ProductDetailsPage = () => {
 
   useLayoutEffect(() => {
     dispatch(getProductDetails(id.toString()));
-  }, [dispatch, id]);
+  }, [dispatch, id, submit]);
 
   const ratingsOptions = {
     size: 30,
@@ -60,7 +65,7 @@ const ProductDetailsPage = () => {
   const updateCartVale = () => {
     dispatch(
       addItemToCart({
-        id: info._id,
+        product: id,
         name: info.name,
         price: info.price,
         quantity: quantity,
@@ -68,6 +73,7 @@ const ProductDetailsPage = () => {
       })
     );
   };
+
   return (
     <>
       {isLoading ? (
@@ -133,6 +139,7 @@ const ProductDetailsPage = () => {
                   </div>
                   <div>
                     <button
+                      disabled={info.stock <= 0}
                       onClick={updateCartVale}
                       className=' text-sm lg:px-6 lg:py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-400 w-full'
                     >
@@ -156,15 +163,22 @@ const ProductDetailsPage = () => {
                 </h1>
               </div>
               <div className=' border-b-2'>
-                <h1 className='text-3xl mb-2 lg:text-5xl'>Description</h1>
+                <h1 className='text-3xl mb-2 '>Description</h1>
                 <p className=' text-xl'>{info.description}</p>
               </div>
             </div>
           </div>
           <div>
+            <div className=' flex items-center justify-center p-2'>
+              <button
+                onClick={() => setOpen((prev) => !prev)}
+                className='p-2 text-sm  lg:px-4 lg:py-2 bg-yellow-500 rounded-full text-white hover:bg-yellow-300 transition-colors'
+              >
+                Submit review
+              </button>
+            </div>
             <h1 className=' text-center text-4xl underline'>Reviews</h1>
-
-            <div className='w-full flex  gap-2 justify-center mt-5 overflow-x-auto '>
+            <div className='w-full flex flex-col lg:justify-center items-center lg:flex-row  gap-2  mt-5 overflow-auto '>
               {info.reviews && info.reviews ? (
                 info.reviews.map((review) => (
                   <ReviewCard key={review._id} review={review} />
@@ -172,6 +186,18 @@ const ProductDetailsPage = () => {
               ) : (
                 <p className=' text-xl text-gray-600'>No Reviews Yet</p>
               )}
+            </div>
+            <div>
+              <AddReviewCard
+                rating={rating}
+                setRating={setRating}
+                comment={comment}
+                setComment={setComment}
+                open={open}
+                setOpen={setOpen}
+                productId={id}
+                setSubmit={setSubmit}
+              />
             </div>
           </div>
         </Container>

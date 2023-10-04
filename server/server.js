@@ -2,15 +2,20 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
 import { notFound, errorHandler } from './middlewares/errorHandler.js'
 import dbConnect from './config/dbConfig.js';
 
+import cloudinary from 'cloudinary'
+import fileUpload from 'express-fileupload'
+
 import productRouter from './routes/productRoutes.js'
 import userRouter from './routes/userRoutes.js'
 import orderRouter from './routes/orderRoute.js'
-import fileUpload from 'express-fileupload'
-import cloudinary from 'cloudinary'
+import paymentRouter from './routes/paymentRoute.js'
+
+
 const app = express();
 
 // config
@@ -21,7 +26,8 @@ dbConnect();
 // midddleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: process.env.ORIGIN, credentials: true }));
+app.use(cors({ origin: process.env.ORIGIN, credentials: true, }));
+
 app.use(fileUpload({
     useTempFiles: true,
 }));
@@ -37,6 +43,7 @@ cloudinary.config({
 app.use('/', userRouter);
 app.use('/', productRouter);
 app.use('/', orderRouter);
+app.use('/', paymentRouter);
 
 
 

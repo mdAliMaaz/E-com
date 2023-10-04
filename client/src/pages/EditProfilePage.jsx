@@ -78,7 +78,7 @@ const EditProfilePage = () => {
             <img
               src={imagePreview}
               alt='avatar'
-              className='lg:w-40 lg:h-40 h-20 w-20 rounded-full object-cover'
+              className='w-40 h-40 rounded-full object-cover'
             />
           </label>
           <input

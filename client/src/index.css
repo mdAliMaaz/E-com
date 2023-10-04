@@ -13,3 +13,7 @@
 body{
     font-family: 'Poppins', sans-serif;
 }
+
+.MuiDataGrid-columnHeader{
+    @apply bg-orange-500 text-white font-bold
+}

@@ -18,7 +18,7 @@ const CartPage = () => {
         <>
           {products.length > 0 ? (
             products.map((item, i) => (
-              <CartCard item={item} i={i} key={item.id} />
+              <CartCard item={item} i={i} key={item.product} delBtn={true} />
             ))
           ) : (
             <EmptyCart />

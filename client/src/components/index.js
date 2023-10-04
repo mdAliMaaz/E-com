@@ -12,6 +12,7 @@ import PublicRoute from './PublicRoute'
 import CartCard from './CartCard'
 import GrandTotal from './GrandTotal'
 import EmptyCart from './EmptyCart'
+import AddReviewCard from './AddReviewCard'
 
 
-export { Navbar, Footer, Container, ProductCard, ScrollToTop, Loading, ReviewCard, Searchbar, Pagination, ProtectedRoute, PublicRoute, CartCard, GrandTotal, EmptyCart }
+export { Navbar, Footer, Container, ProductCard, ScrollToTop, Loading, ReviewCard, Searchbar, Pagination, ProtectedRoute, PublicRoute, CartCard, GrandTotal, EmptyCart, AddReviewCard }

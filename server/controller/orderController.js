@@ -48,13 +48,12 @@ export const getSingleOrder = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error("Order not found")
     }
-    res.status(200).json({ success: true, order })
+    res.status(200).json(order)
 })
 
 // @ Desc get all orders of logged in user
 // @ GET /api/orders/me
 export const myOrders = asyncHandler(async (req, res) => {
-    console.log("Heloo")
 
     const orders = await Order.find({ user: req.user.id })
 
@@ -63,7 +62,7 @@ export const myOrders = asyncHandler(async (req, res) => {
         throw new Error("Order not found")
     }
 
-    res.status(200).json({ success: true, orders })
+    res.status(200).json(orders)
 })
 
 

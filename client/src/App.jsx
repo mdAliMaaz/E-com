@@ -10,10 +10,14 @@ import {
   CartPage,
   ChangePasswordPage,
   CheckoutPage,
+  ConformOrder,
   EditProfilePage,
   ForgotPasswordPage,
   HomePage,
   LoginPage,
+  MyOrdersPage,
+  OrderDetails,
+  PaymentSuccessPage,
   ProductDetailsPage,
   ProductsPage,
   RegisterPage,
@@ -30,6 +34,8 @@ const App = () => {
         {/* Protected Routes */}
         <Route element={<ProtectedRoute />}>
           <Route path='/profile' element={<UserProfilePage />} />
+          <Route path='/myorders' element={<MyOrdersPage />} />
+          <Route path='/orders/:id' element={<OrderDetails />} />
           <Route path='/profile/edit' element={<EditProfilePage />} />
           <Route
             path='/profile/changepassword'
@@ -40,6 +46,8 @@ const App = () => {
           <Route path='/products/:id' element={<ProductDetailsPage />} />
           <Route path='/cart' element={<CartPage />} />
           <Route path='/checkout' element={<CheckoutPage />} />
+          <Route path='/order/conform' element={<ConformOrder />} />
+          <Route path='/payment/success' element={<PaymentSuccessPage />} />
         </Route>
         <Route element={<PublicRoute />}>
           {/* Public Routes */}

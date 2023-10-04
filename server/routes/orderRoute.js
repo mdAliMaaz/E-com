@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route('/api/orders').post(protect, newOrder);
 
-router.route('/api/order/:id').get(protect, isAdmin("admin"), getSingleOrder)
+router.route('/api/order/:id').get(protect, getSingleOrder)
 
 router.route('/api/orders/me').get(protect, myOrders)
 

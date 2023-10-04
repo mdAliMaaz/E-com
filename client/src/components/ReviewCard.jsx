@@ -9,7 +9,7 @@ const ReviewCard = ({ review }) => {
 
   return (
     <>
-      <div className='w-fll  lg:w-1/2 border-2 border-gray-400 flex flex-nowrap items-center justify-between flex-col p-3'>
+      <div className='w-[250px] h-full lg:w-1/2 border-2 border-gray-400 flex flex-nowrap items-center gap-2 flex-col p-3'>
         <div className=' w-16 h-[70px]'>
           <img src='/Profile.png' alt='review/profile' />
         </div>
@@ -18,7 +18,7 @@ const ReviewCard = ({ review }) => {
           <ReactStars {...options} />
         </div>
 
-        <p>{review.comment}</p>
+        <p className=' w-full text-center'>{review.comment}</p>
       </div>
     </>
   );

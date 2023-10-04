@@ -76,7 +76,10 @@ const UserProfilePage = () => {
                 <h1 className=' lg:text-2xl '>{data.email}</h1>
               </div>
               <div className=' flex flex-col lg:flex-row gap-4 items-center justify-between mt-10'>
-                <Link className=' px-5 py-2 bg-orange-500 text-white hover:bg-orange-300 transition-colors'>
+                <Link
+                  to={"/myorders"}
+                  className=' px-5 py-2 bg-orange-500 text-white hover:bg-orange-300 transition-colors'
+                >
                   Orders
                 </Link>
                 <Link
