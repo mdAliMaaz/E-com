@@ -111,12 +111,23 @@ export const getSingleOrder = createAsyncThunk('getSingleOrder', async (id) => {
     }
 })
 
+
+export const getAllUsers = createAsyncThunk('getAllUsers', async () => {
+    try {
+        const { data } = await axios.get("http://localhost:5000/api/admin/users", { withCredentials: true });
+        return data;
+    } catch (error) {
+        handleError(error.message);
+    }
+})
+
 const initialState = {
     isLoading: false,
     isError: false,
     data: {},
     userOrders: null,
-    singleOrder: null
+    singleOrder: null,
+    allUsers: {}
 }
 
 
@@ -153,6 +164,11 @@ const userSlice = createSlice({
         })
         builder.addCase(getSingleOrder.rejected, (state, action) => {
             state.isError = true;
+        }).addCase(getAllUsers.pending, (state, action) => {
+            state.isLoading = true;
+        }).addCase(getAllUsers.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.allUsers = action.payload;
         });
     }
 })

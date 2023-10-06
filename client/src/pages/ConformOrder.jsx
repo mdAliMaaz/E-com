@@ -17,7 +17,7 @@ const ConformOrder = () => {
 
   const [grandTotal, setGrandTotal] = useState(0);
 
-  const body = useSelector((state) => state.cart);
+  let body = useSelector((state) => state.cart);
 
   useEffect(() => {
     const products = Object.values(cartItems);

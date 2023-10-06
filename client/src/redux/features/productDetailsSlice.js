@@ -1,11 +1,28 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { handleError, handleSuccess } from '../../helper/notification';
 
 export const getProductDetails = createAsyncThunk("getProductDetails", async (id) => {
     const response = await fetch(`http://localhost:5000/api/products/${id}`, { method: "GET", credentials: "include" })
     return await response.json()
 })
+
+
+export const updateProduct = createAsyncThunk("updateProduct", async ({ id, formData }) => {
+
+    try {
+        const { data } = await axios.put(`http://localhost:5000/api/products/${id}`, formData, { withCredentials: true })
+        if (data.success) {
+            handleSuccess(data.message, data.success)
+        }
+        else {
+            handleError(data.message)
+        }
+    } catch (error) {
+        handleError(error.message)
+    }
+
+});
 
 
 export const submitReview = createAsyncThunk('submitReview', async (review) => {

@@ -15,6 +15,6 @@ import EmptyCart from './EmptyCart'
 import AddReviewCard from './AddReviewCard'
 import AdminRoutes from './AdminRoutes'
 import Sidebar from './Sidebar'
+import CustomInput from './CustomInput'
 
-
-export { Navbar, Footer, Container, ProductCard, ScrollToTop, Loading, ReviewCard, Searchbar, Pagination, ProtectedRoute, PublicRoute, CartCard, GrandTotal, EmptyCart, AddReviewCard, AdminRoutes, Sidebar }
+export { Navbar, Footer, Container, ProductCard, ScrollToTop, Loading, ReviewCard, Searchbar, Pagination, ProtectedRoute, PublicRoute, CartCard, GrandTotal, EmptyCart, AddReviewCard, AdminRoutes, Sidebar, CustomInput }

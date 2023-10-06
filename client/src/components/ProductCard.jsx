@@ -17,10 +17,7 @@ const ProductCard = ({ item, href }) => {
     <Link to={href} className=' hover:-translate-y-3 transition-all'>
       <div className=' w-fit border border-black/50 p-2 shadow-lg rounded-sm'>
         <div>
-          <img
-            src={"https://m.media-amazon.com/images/I/71SH7FPUPoL._SY466_.jpg"}
-            alt={name}
-          />
+          <img src={images[0].url} alt={name} />
         </div>
         <div>
           <h1 className=' font-bold'>{name}</h1>

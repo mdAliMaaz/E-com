@@ -84,21 +84,12 @@ const ProductDetailsPage = () => {
             <div className='w-[300px] lg:flex-1 p-10'>
               {/* left */}
               <Carousel className=' w-full'>
-                <div>
-                  <img
-                    className=' object-contain'
-                    src='https://rukminim2.flixcart.com/image/416/416/xif0q/book/c/7/b/it-starts-with-us-original-imagk4cycj4yv9yu.jpeg?q=70'
-                  />
-                  <p className='legend'>{info.name}</p>
-                </div>
-                <div>
-                  <img src='https://rukminim2.flixcart.com/image/416/416/xif0q/book/c/7/b/it-starts-with-us-original-imagk4cycj4yv9yu.jpeg?q=70' />
-                  <p className='legend'>{info.name}</p>
-                </div>
-                <div>
-                  <img src='https://rukminim2.flixcart.com/image/416/416/xif0q/book/c/7/b/it-starts-with-us-original-imagk4cycj4yv9yu.jpeg?q=70' />
-                  <p className='legend'>{info.name}</p>
-                </div>
+                {info.images?.map((item) => (
+                  <div key={item.public_id}>
+                    <img className=' object-contain' src={item.url} />
+                    <p className='legend'>{info.name}</p>
+                  </div>
+                ))}
               </Carousel>
             </div>
 

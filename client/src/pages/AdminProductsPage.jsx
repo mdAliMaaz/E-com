@@ -1,11 +1,12 @@
 import { Loading, Sidebar } from "../components";
-import { getProducts } from ".././redux/features/productSlice";
+import { getProducts, deleteProduct } from ".././redux/features/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { BiSolidEdit } from "react-icons/bi";
 import { IoAdd } from "react-icons/io5";
+import { AiFillDelete } from "react-icons/ai";
 
 const AdminProductsPage = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,6 @@ const AdminProductsPage = () => {
     {
       field: "name",
       headerName: "Name",
-      minWidth: 150,
       flex: 0.5,
     },
     {
@@ -31,7 +31,7 @@ const AdminProductsPage = () => {
       headerName: "Price",
       type: "number",
       minWidth: 150,
-      flex: 0.3,
+      flex: 1,
     },
 
     {
@@ -39,12 +39,12 @@ const AdminProductsPage = () => {
       headerName: "Category",
       type: "string",
       minWidth: 270,
-      flex: 0.5,
+      flex: 1,
     },
 
     {
       field: "stock",
-      flex: 0.3,
+      flex: 1,
       headerName: "Stock",
       minWidth: 150,
       type: "number",
@@ -52,26 +52,34 @@ const AdminProductsPage = () => {
     },
     {
       field: "action",
-      flex: 0.3,
+      flex: 1,
       headerName: "Action",
       minWidth: 150,
       type: "number",
       sortable: false,
       renderCell: (params) => {
         return (
-          <Link
-            to={`/orders/${params.id}`}
-            className=' hover:text-orange-500 transition-all text-lg'
-          >
-            <BiSolidEdit />
-          </Link>
+          <div className=' flex items-center gap-1'>
+            <Link
+              to={`/admin/products/${params.id}`}
+              className=' hover:text-orange-500 transition-all text-lg'
+            >
+              <BiSolidEdit />
+            </Link>
+            <button
+              onClick={() => handleDelete(params.id)}
+              className=' hover:text-orange-500 transition-all text-lg'
+            >
+              <AiFillDelete />
+            </button>
+          </div>
         );
       },
     },
   ];
 
   const rows = [];
-  data.products?.forEach((item, index) => {
+  data.products?.forEach((item) => {
     rows.push({
       name: item.name,
       id: item._id,
@@ -81,7 +89,12 @@ const AdminProductsPage = () => {
     });
   });
 
-  useEffect(() => {
+  const handleDelete = (id) => {
+    dispatch(deleteProduct(id));
+    window.location.reload();
+  };
+
+  useLayoutEffect(() => {
     dispatch(getProducts({}));
   }, [dispatch]);
 
@@ -97,7 +110,7 @@ const AdminProductsPage = () => {
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={10}
+              pageSize={5}
               disableSelectionOnClick
               autoHeight
             />

@@ -13,12 +13,14 @@ import {
 import { Route, Routes } from "react-router-dom";
 
 import {
+  AddProductPage,
   AdminProductsPage,
   CartPage,
   ChangePasswordPage,
   CheckoutPage,
   ConformOrder,
   Dashboard,
+  EditProductPage,
   EditProfilePage,
   ForgotPasswordPage,
   HomePage,
@@ -71,6 +73,8 @@ const App = () => {
         <Route element={<AdminRoutes />}>
           <Route path='/admin/dashboard' element={<Dashboard />} />
           <Route path='/admin/products' element={<AdminProductsPage />} />
+          <Route path='/admin/products/add' element={<AddProductPage />} />
+          <Route path='/admin/products/:id' element={<EditProductPage />} />
           <Route path='/admin/users' element={<UsersPage />} />
           <Route path='/admin/orders' element={<OrdersPage />} />
           <Route path='/admin/reviews' element={<ReviewsPage />} />

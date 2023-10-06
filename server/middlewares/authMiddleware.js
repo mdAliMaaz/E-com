@@ -5,7 +5,6 @@ import User from '../models/userModel.js';
 
 const protect = asyncHandler(async (req, res, next) => {
     const { token } = req.cookies;
-
     if (token) {
 
         try {

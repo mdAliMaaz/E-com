@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { registerUser, getAllUsers, getUserById, updateUser, deleteUser, login, forgotPassword, resetPassword, getUserInfo, logout, changePassword, updateProfile } from '../controller/userController.js';
+import { registerUser, getAllUsers, getUserById, updateUser, deleteUser, login, forgotPassword, resetPassword, getUserInfo, logout, changePassword, updateProfile, updateUserRole } from '../controller/userController.js';
 
 import { isAdmin, protect } from '../middlewares/authMiddleware.js';
 
@@ -26,6 +26,7 @@ router.route('/api/users/password/reset/:token').put(resetPassword);
 
 // admin
 router.route("/api/admin/users").get(protect, isAdmin("admin"), getAllUsers)
+router.route("/api/admin/users/role/:id").post(protect, isAdmin("admin"), updateUserRole)
 router.route("/api/admin/users/:id").get(protect, isAdmin("admin"), getUserById)
 router.route("/api/admin/users/:id").put(protect, isAdmin("admin"), updateUser)
 router.route("/api/admin/users/:id").delete(protect, isAdmin("admin"), deleteUser)

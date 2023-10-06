@@ -15,7 +15,7 @@ import { uploadImage } from '../utils/cloudinary.js';
 // @ Route GET: /api/users
 export const getAllUsers = asyncHandler(async (req, res) => {
 
-    const allUsers = await User.find();
+    const allUsers = await User.find().select('avatar email name role');
 
     if (!allUsers) {
         res.status(404)
@@ -285,3 +285,19 @@ export const updateProfile = asyncHandler(async (req, res) => {
 
 })
 
+export const updateUserRole = asyncHandler(async (req, res) => {
+
+    const id = req.params.id;
+
+    const user = await User.findById(id);
+
+    if (user.role === "admin") {
+        user.role = "user";
+    }
+    else {
+        user.role = "admin"
+    }
+
+    await user.save();
+    res.status(200).json({ success: true, message: "User role updated successfully" })
+})

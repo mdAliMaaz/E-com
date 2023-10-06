@@ -30,6 +30,7 @@ app.use(cors({ origin: process.env.ORIGIN, credentials: true, }));
 
 app.use(fileUpload({
     useTempFiles: true,
+    tempFileDir: '/tmp/'
 }));
 
 cloudinary.config({

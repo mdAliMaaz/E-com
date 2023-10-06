@@ -75,13 +75,12 @@ export const allOrders = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error("Order not found")
     }
-
     let totalAmount = 0;
 
     orders.forEach((order) => {
         totalAmount += order.totalPrice
     })
-    res.status(200).json({ success: true, totalAmount, orders })
+    res.status(200).json({ totalAmount, orders })
 })
 
 // @ Desc Update order -- Admin only

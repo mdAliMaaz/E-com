@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { BiSolidDashboard } from "react-icons/bi";
 import { AiFillGift } from "react-icons/ai";
 import { FiUsers } from "react-icons/fi";
-import { FaRegGrinStars } from "react-icons/fa";
 import { MdOutlineTransferWithinAStation } from "react-icons/md";
 
 const Sidebar = () => {
@@ -36,13 +35,6 @@ const Sidebar = () => {
       >
         Orders
         <MdOutlineTransferWithinAStation />
-      </Link>
-      <Link
-        className=' flex items-center gap-1 hover:text-orange-500 transition-colors'
-        to='/admin/reviews'
-      >
-        Reviews
-        <FaRegGrinStars />
       </Link>
     </div>
   );

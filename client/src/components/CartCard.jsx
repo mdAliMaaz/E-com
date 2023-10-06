@@ -21,11 +21,7 @@ const CartCard = ({ item, i, delBtn }) => {
       )}
 
       <div className='lg:w-1/12 w-1/6 flex  items-center lg:flex-row  gap-2'>
-        <img
-          className='w-full'
-          src='https://rukminim2.flixcart.com/image/416/416/xif0q/book/l/p/3/-original-imagqtdtypgf8znh.jpeg?q=70'
-          alt='product'
-        />
+        <img className='w-full' src={item.image.url} alt='product' />
         <div className='w-1/4 lg:w-1/2'>
           <h1 className=' text-xs text-gray-700'> {item.name}</h1>
           <p className='  text-sm text-gray-700'>₹{item.price}</p>

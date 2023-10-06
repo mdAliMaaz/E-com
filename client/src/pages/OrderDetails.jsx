@@ -9,6 +9,7 @@ const OrderDetails = () => {
   const { id } = useParams();
   const { singleOrder, isLoading } = useSelector((state) => state.user);
 
+  console.log(singleOrder);
   useEffect(() => {
     dispatch(getSingleOrder(id));
   }, []);

@@ -44,10 +44,16 @@ const orderSchema = new mongoose.Schema({
                 type: Number,
                 required: true,
             },
-            image: {
-                type: String,
-                required: true,
-            },
+            image: [{
+                public_id: {
+                    type: String,
+                    required: true
+                },
+                url: {
+                    type: String,
+                    required: true
+                }
+            }],
             product: {
                 type: mongoose.Schema.ObjectId,
                 ref: "Product",
