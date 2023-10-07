@@ -20,6 +20,7 @@ import {
   CheckoutPage,
   ConformOrder,
   Dashboard,
+  EditOrderPage,
   EditProductPage,
   EditProfilePage,
   ForgotPasswordPage,
@@ -77,6 +78,7 @@ const App = () => {
           <Route path='/admin/products/:id' element={<EditProductPage />} />
           <Route path='/admin/users' element={<UsersPage />} />
           <Route path='/admin/orders' element={<OrdersPage />} />
+          <Route path='/admin/orders/:id' element={<EditOrderPage />} />
           <Route path='/admin/reviews' element={<ReviewsPage />} />
         </Route>
       </Routes>

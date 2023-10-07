@@ -77,7 +77,7 @@ const OrdersPage = () => {
 
   const rows = [];
 
-  Object.values(orders.orders).forEach((item) => {
+  Object.values(orders.orders)?.forEach((item) => {
     let singleRow = {
       id: item._id,
       user: item.user,

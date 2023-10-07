@@ -21,8 +21,8 @@ import OrdersPage from "./OrdersPage";
 import ReviewsPage from "./ReviewsPage";
 import AddProductPage from "./AddProductPage";
 import EditProductPage from "./EditProductPage";
+import EditOrderPage from "./EditOrderPage";
 
 
 
-
-export { HomePage, ProductDetailsPage, ProductsPage, LoginPage, RegisterPage, UserProfilePage, EditProfilePage, ChangePasswordPage, ForgotPasswordPage, ResetPasswordPage, CartPage, CheckoutPage, ConformOrder, PaymentSuccessPage, MyOrdersPage, OrderDetails, Dashboard, UsersPage, AdminProductsPage, OrdersPage, ReviewsPage, AddProductPage,EditProductPage }
+export { HomePage, ProductDetailsPage, ProductsPage, LoginPage, RegisterPage, UserProfilePage, EditProfilePage, ChangePasswordPage, ForgotPasswordPage, ResetPasswordPage, CartPage, CheckoutPage, ConformOrder, PaymentSuccessPage, MyOrdersPage, OrderDetails, Dashboard, UsersPage, AdminProductsPage, OrdersPage, ReviewsPage, AddProductPage, EditProductPage, EditOrderPage }

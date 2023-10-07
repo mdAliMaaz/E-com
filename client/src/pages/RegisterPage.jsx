@@ -123,7 +123,7 @@ const RegisterPage = () => {
         />
         <div>
           <span className=' lg:text-lg text-gray-600'>
-            Already a user ? name="name"
+            Already a user ?
             <Link className=' text-blue-500' to={"/login"}>
               click here
             </Link>
